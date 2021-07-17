@@ -49,14 +49,14 @@ class UserController extends Controller
     // to get all says
     public function getSay()
     {
-        $say = Say::select('value')->inRandomOrder()->take(2)->get();
-        return $this->returnData('say is :',$say,'There ara all says in app','201');
+        $say = Say::select('value')->inRandomOrder()->take(1)->get();
+        return $this->returnData('say is ',$say,'Today Say','201');
     }
 
 
 
     // to return all challenges for user
-    public function getChallenge(Request $request)
+    public function getUserChallenge(Request $request)
     {
         $challenge= Challenge::with('user')->select('id' , 'value' )->
             where('available',0)->
@@ -64,6 +64,7 @@ class UserController extends Controller
 
         return $this->returnData('Challenges',$challenge,'These challenges belong to this user','201');
     }
+
 
 
     // to accept challenge ( update availability from 0 to 1 )

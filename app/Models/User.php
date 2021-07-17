@@ -38,15 +38,15 @@ class User extends Authenticatable
     ];
 
 
-    public function beginning()
-    {
-        return $this->belongsTo('App\Models\Beginning','user_id');
-    }
+//    public function beginning()
+//    {
+//        return $this->belongsTo('App\Models\Beginning','user_id');
+//    }
 
 
     public function challenge()
     {
-        return $this->hasMany('App\Models\Challenge','user_id');
+        return $this->belongsToMany('App\Models\Challenge','user_challenges','user_id', 'challenge_id');
     }
 
 }

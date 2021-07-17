@@ -17,8 +17,6 @@ class CreateChallengesTable extends Migration
             $table->id();
             $table->string('value');
             $table->string('available');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

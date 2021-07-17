@@ -8,18 +8,27 @@ class Challenge extends Model
 {
 
     protected $fillable = [
-        'value' , 'available' ,'user_id'
+        'value' , 'available'
     ];
 
     protected $hidden = [
-        'user'
+//        'user'
     ];
 
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User','user_id');
+        return $this->belongsToMany('App\Models\User');
     }
 
+
+
+//    use App\Models\User;
+//
+//$user = User::find(1);
+//
+//foreach ($user->roles as $role) {
+//    //
+//}
 
 }

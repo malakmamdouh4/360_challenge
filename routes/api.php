@@ -20,19 +20,19 @@ use Illuminate\Support\Facades\Route;
 
 
 // to add user data like name , avatar and time
-Route::post('userName','UserController@userName');
+Route::post('/userData','UserController@userData');
 
 
 // to get user profile
-Route::get('userProfile','UserController@userProfile');
+Route::get('/userProfile','UserController@userProfile');
 
 
 // to get all says
-Route::get('getSay','UserController@getSay');
+Route::get('/getSay','UserController@getSay');
 
 
 // to return all challenges for user
-Route::get('getChallenge','UserController@getChallenge');
+Route::get('/getUserChallenge','UserController@getUserChallenge');
 
 
 // to accept challenge ( update availability from 0 to 1 )
