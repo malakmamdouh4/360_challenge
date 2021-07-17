@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // to add user data like name , avatar and time
-Route::any('/userData','UserController@userData');
+Route::post('/userData','UserController@userData');
 
 
 
