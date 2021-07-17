@@ -20,7 +20,13 @@ use Illuminate\Support\Facades\Route;
 
 
 // to add user data like name , avatar and time
-Route::post('/userData','UserController@userData');
+Route::any('/userData','UserController@userData');
+
+
+
+// to add user data like name , avatar and time
+Route::post('/addChallenge','UserController@addChallenge');
+
 
 
 // to get user profile

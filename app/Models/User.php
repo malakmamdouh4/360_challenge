@@ -49,4 +49,31 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Challenge','user_challenges','user_id', 'challenge_id');
     }
 
+
+    public function hasAnyChallenge($Challenges){
+        if (is_array($Challenges)){
+            foreach ($Challenges as $Challenge){
+                if ($this->hasChallenge($Challenge)){
+                    return true;
+                }
+            }
+        }else{
+            if ($this->hasChallenge($Challenges)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function hasChallenge($Challenge){
+        if ($this->Challenges()->where('name',$Challenge)->first()){
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+
 }

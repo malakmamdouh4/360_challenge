@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+
 
 class Challenge extends Model
 {
@@ -18,17 +20,8 @@ class Challenge extends Model
 
     public function user()
     {
-        return $this->belongsToMany('App\Models\User');
+        return $this->belongsToMany('App\Models\User','user_challenges','user_id', 'challenge_id');
     }
 
-
-
-//    use App\Models\User;
-//
-//$user = User::find(1);
-//
-//foreach ($user->roles as $role) {
-//    //
-//}
 
 }

@@ -31,6 +31,17 @@ class UserController extends Controller
     }
 
 
+    public function addChallenge(Request $request)
+    {
+        $challenge = Challenge::create([
+            'value' => $request->input('value'),
+            'available' => $request->input('available'),
+        ]);
+
+        return $this->returnData('challenge',$challenge,'challenge added successfully','404');
+    }
+
+
 
     // to get user profile
     public function userProfile(Request $request)
