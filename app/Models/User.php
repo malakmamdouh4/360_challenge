@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+//use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+
+
+class User extends Model
 {
     use Notifiable;
 
@@ -16,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name' , 'avatar' , 'hour' , 'minute' , 'period'
+        'name' , 'avatar'
     ];
 
     /**
@@ -38,40 +41,13 @@ class User extends Authenticatable
     ];
 
 
-//    public function beginning()
-//    {
-//        return $this->belongsTo('App\Models\Beginning','user_id');
-//    }
 
 
-    public function challenge()
+    public function challenges()
     {
-        return $this->belongsToMany('App\Models\Challenge','user_challenges','user_id', 'challenge_id');
+        return $this->belongsToMany('App\Models\Challenge','user_challenge',
+            'user_id', 'challenge_id');
     }
-
-
-    public function hasAnyChallenge($Challenges){
-        if (is_array($Challenges)){
-            foreach ($Challenges as $Challenge){
-                if ($this->hasChallenge($Challenge)){
-                    return true;
-                }
-            }
-        }else{
-            if ($this->hasChallenge($Challenges)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function hasChallenge($Challenge){
-        if ($this->Challenges()->where('name',$Challenge)->first()){
-            return true;
-        }
-        return false;
-    }
-
 
 
 

@@ -17,9 +17,6 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('avatar')->nullable();
-            $table->bigInteger('hour');
-            $table->bigInteger('minute');
-            $table->string('period');
             $table->timestamps();
         });
     }

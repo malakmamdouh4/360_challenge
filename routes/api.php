@@ -23,27 +23,28 @@ use Illuminate\Support\Facades\Route;
 Route::post('/userData','UserController@userData');
 
 
-
-// to add user data like name , avatar and time
+// to add challenge
 Route::post('/addChallenge','UserController@addChallenge');
-
 
 
 // to get user profile
 Route::get('/userProfile','UserController@userProfile');
 
 
-// to get all says
+// to get all says in random
 Route::get('/getSay','UserController@getSay');
+
+
+// to get four challenges in random
+Route::get('/getFourChallenges','UserController@getFourChallenges');
+
+
+// to accept challenge to do
+Route::post('/acceptChallenge','UserController@acceptChallenge');
 
 
 // to return all challenges for user
 Route::get('/getUserChallenge','UserController@getUserChallenge');
-
-
-// to accept challenge ( update availability from 0 to 1 )
-Route::put('updateAvailable','UserController@updateAvailable');
-
 
 
 

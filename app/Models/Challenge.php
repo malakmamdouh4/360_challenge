@@ -3,24 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
 
 
 class Challenge extends Model
 {
 
     protected $fillable = [
-        'value' , 'available'
+        'value'
     ];
 
     protected $hidden = [
-//        'user'
+        'pivot' , 'created_at' ,'updated_at'
     ];
 
 
-    public function user()
+    public function users()
     {
-        return $this->belongsToMany('App\Models\User','user_challenges','user_id', 'challenge_id');
+        return $this->belongsToMany('App\Models\User','user_challenge'
+            , 'challenge_id' , 'user_id');
     }
 
 
