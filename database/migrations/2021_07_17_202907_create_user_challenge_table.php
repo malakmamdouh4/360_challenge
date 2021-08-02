@@ -15,12 +15,14 @@ class CreateUserChallengeTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_challenge', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('challenge_id')->unsigned();
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        });
+        if (!Schema::hasTable('user_challenge')) {
+            Schema::create('user_challenge', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('user_id')->unsigned();
+                $table->integer('challenge_id')->unsigned();
+                $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            });
+        }
     }
 
     /**
@@ -30,6 +32,6 @@ class CreateUserChallengeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_challenges');
+        Schema::dropIfExists('user_challenge');
     }
 }
