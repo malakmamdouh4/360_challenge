@@ -37,7 +37,7 @@ class UserController extends Controller
             'value' => $request->input('value'),
         ]);
 
-        return $this->returnData('challenge',$challenge,'challenge added successfully','404');
+        return $this->returnData('challenge',$challenge,'challenge added successfully','201');
     }
 
 
@@ -49,9 +49,20 @@ class UserController extends Controller
 
         if($user)
         {
-            $data = [ $user->name , $user->avatar ];
-            return $this->returnData('user',$data,'Welcome in your profile','201');
+            return $this->returntoken('userName',$user->name,'userAvatar',$user->avatar,'Welcome in your profile','201');
         }
+    }
+
+
+
+    // to add say
+    public function addSay(Request $request)
+    {
+        $say = Say::create([
+            'value' => $request->input('value'),
+        ]);
+
+        return $this->returnData('Say',$say,'Say added successfully','201');
     }
 
 
@@ -60,7 +71,7 @@ class UserController extends Controller
     public function getSay()
     {
         $say = Say::select('id','value')->inRandomOrder()->take(1)->get();
-        return $this->returnData('say is ',$say,'Today Say','201');
+        return $this->returnData('say',$say,'Today Say','201');
     }
 
 
@@ -77,7 +88,7 @@ class UserController extends Controller
                 $q->where('user_id', $request->input('user_id'));
             })->inRandomOrder()->take(4)->get();
 
-            return $this->returnData('Your Challenges',$challenges,'success',201);
+            return $this->returnData('YourChallenges',$challenges,'success',201);
         }
 
         else
@@ -99,15 +110,17 @@ class UserController extends Controller
         {
             $user->challenges()->syncWithoutDetaching( $request->input('challenge_id'));
 
-            $time = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
-                ->where('challenge_id',$request->input('challenge_id'))->get();
+//            $time = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
+//                ->where('challenge_id',$request->input('challenge_id'))->get();
 
-            return $this->returnData('time to start ',$time,'Accept Challenge to done','201');
+            $time = $_SERVER['REQUEST_TIME'];
+            return $this->returnData('timeToStart ',$time,'Accept Challenge to done','201');
         }
         else
         {
             return $this->returnError('404','Failed');
         }
+
     }
 
 

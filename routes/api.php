@@ -31,6 +31,10 @@ Route::post('/addChallenge','UserController@addChallenge');
 Route::get('/userProfile','UserController@userProfile');
 
 
+// to add say
+Route::post('/addSay','UserController@addSay');
+
+
 // to get all says in random
 Route::get('/getSay','UserController@getSay');
 
