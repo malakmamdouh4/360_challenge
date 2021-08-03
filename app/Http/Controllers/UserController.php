@@ -49,7 +49,7 @@ class UserController extends Controller
 
         if($user)
         {
-            return $this->returntoken('userName',$user->name,'userAvatar',$user->avatar,'Welcome in your profile','201');
+            return $this->returnMultiData('userName',$user->name,'userAvatar',$user->avatar,'Welcome in your profile','201');
         }
     }
 
@@ -62,7 +62,7 @@ class UserController extends Controller
             'value' => $request->input('value'),
         ]);
 
-        return $this->returnData('Say',$say,'Say added successfully','201');
+        return $this->returnMultiData('sayName',$say->value,'sayId',$say->id,'Say added successfully','201');
     }
 
 

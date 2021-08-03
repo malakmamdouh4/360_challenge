@@ -38,7 +38,7 @@ trait GeneralTrait
     }
 
 
-    public function returntoken($token,$value,$id,$valueId,$msg,$errNum)
+    public function returnMultiData($token,$value,$id,$valueId,$msg,$errNum)
     {
         return response()->json([
             'status' => true ,
