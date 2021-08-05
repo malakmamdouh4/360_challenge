@@ -26,7 +26,8 @@ class UserController extends Controller
             'avatar' => $request->input('avatar'),
         ]);
 
-        return $this->returnData('user',$user,'You login successfully','201');
+        return $this->return3Data('id',$user->id,'name',$user->name,
+            'avatar',$user->avatar,'You login successfully','201');
     }
 
 
@@ -37,7 +38,7 @@ class UserController extends Controller
             'value' => $request->input('value'),
         ]);
 
-        return $this->returnData('challenge',$challenge,'challenge added successfully','201');
+        return $this->return2Data('id',$challenge->id,'value',$challenge->value,'challenge added successfully','201');
     }
 
 
@@ -49,7 +50,8 @@ class UserController extends Controller
 
         if($user)
         {
-            return $this->returnMultiData('userName',$user->name,'userAvatar',$user->avatar,'Welcome in your profile','201');
+            return $this->return3Data('id',$user->id,'name',$user->name,
+                'avatar',$user->avatar,'Welcome in your profile','201');
         }
     }
 
@@ -62,7 +64,7 @@ class UserController extends Controller
             'value' => $request->input('value'),
         ]);
 
-        return $this->returnMultiData('sayName',$say->value,'sayId',$say->id,'Say added successfully','201');
+        return $this->return2Data('id',$say->id,'value',$say->value,'Say added successfully','201');
     }
 
 
@@ -71,7 +73,9 @@ class UserController extends Controller
     public function getSay()
     {
         $say = Say::select('id','value')->inRandomOrder()->take(1)->get();
-        return $this->returnData('say',$say,'Today Say','201');
+
+            return $this->returnData('say',$say,'Today Say','201');
+
     }
 
 
@@ -88,7 +92,7 @@ class UserController extends Controller
                 $q->where('user_id', $request->input('user_id'));
             })->inRandomOrder()->take(4)->get();
 
-            return $this->returnData('YourChallenges',$challenges,'success',201);
+            return $this->return2Data('userId',$user->id,'challenges',$challenges,'success',201);
         }
 
         else
@@ -109,12 +113,9 @@ class UserController extends Controller
         if ($user && $challenge)
         {
             $user->challenges()->syncWithoutDetaching( $request->input('challenge_id'));
-
-//            $time = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
-//                ->where('challenge_id',$request->input('challenge_id'))->get();
-
             $time = $_SERVER['REQUEST_TIME'];
-            return $this->returnData('timeToStart ',$time,'Accept Challenge to done','201');
+
+            return $this->return3Data('id',$challenge->id,'value',$challenge->value,'timeToStart ',$time,'Accept Challenge to done','201');
         }
         else
         {
@@ -129,7 +130,9 @@ class UserController extends Controller
     public function getUserChallenge(Request $request)
     {
         $user = User::with('challenges')->find($request->input('user_id'));
-        return $this->returnData('Data',$user,'Challenges for specific user','201');
+
+        return $this->return4Data('id',$user->id,'name',$user->id,'avatar',$user->avatar,
+            'challenges',$user->challenges,'Challenges for specific user','201');
     }
 
 

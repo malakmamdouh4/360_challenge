@@ -38,17 +38,44 @@ trait GeneralTrait
     }
 
 
-    public function returnMultiData($token,$value,$id,$valueId,$msg,$errNum)
+    public function return2Data($param1,$value1,$param2,$value2,$msg,$errNum)
     {
         return response()->json([
             'status' => true ,
             'errNum' => $errNum ,
             'msg' => $msg ,
-            $token => $value,
-            $id =>$valueId
+            $param1 => $value1,
+            $param2 =>$value2
         ]);
     }
 
+
+    public function return3Data($param1,$value1,$param2,$value2,$param3,$value3,$msg,$errNum)
+    {
+        return response()->json([
+            'status' => true ,
+            'errNum' => $errNum ,
+            'msg' => $msg ,
+            $param1 => $value1,
+            $param2 =>$value2 ,
+            $param3 => $value3
+        ]);
+    }
+
+
+
+    public function return4Data($param1,$value1,$param2,$value2,$param3,$value3,$param4,$value4,$msg,$errNum)
+    {
+        return response()->json([
+            'status' => true ,
+            'errNum' => $errNum ,
+            'msg' => $msg ,
+            $param1 => $value1,
+            $param2 =>$value2 ,
+            $param3 => $value3,
+            $param4 => $value4
+        ]);
+    }
 
     public function returnAllDates($hours,$hourValue,$minutes,$minuteValue,$periods,$periodValue,$msg,$errNum)
     {
