@@ -51,6 +51,16 @@ Route::post('/acceptChallenge','UserController@acceptChallenge');
 Route::get('/getUserChallenge','UserController@getUserChallenge');
 
 
+// return count of challenges to a specific user
+Route::get('/getCountUserChallenge','UserController@getCountUserChallenge');
+
+
+// return feeling about specific challenge
+Route::get('/getCountFeeling','UserController@getCountFeeling');
+
+
+// delete/skip challenge's today
+Route::post('/deleteChallenge','UserController@deleteChallenge');
 
 
 
@@ -61,16 +71,3 @@ Route::get('/getUserChallenge','UserController@getUserChallenge');
 
 
 
-
-
-
-
-
-////  to add user image
-//    Route::post('userImage','UserController@userImage');
-
-////  to get all hours
-//    Route::get('getDates','UserController@getDates');
-
-////  to add user beginning
-//    Route::post('userBeginning','UserController@userBeginning');

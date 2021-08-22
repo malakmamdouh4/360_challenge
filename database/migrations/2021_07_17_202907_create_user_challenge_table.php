@@ -20,6 +20,7 @@ class CreateUserChallengeTable extends Migration
                 $table->increments('id');
                 $table->integer('user_id')->unsigned();
                 $table->integer('challenge_id')->unsigned();
+                $table->integer('feeling')->nullable();
                 $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             });
         }

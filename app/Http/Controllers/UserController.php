@@ -137,79 +137,79 @@ class UserController extends Controller
 
 
 
+    // return count of challenges to a specific user
+    public function getCountUserChallenge(Request $request)
+    {
+        $countChallenge = DB::table('user_challenge')->where('user_id',$request->input('user_id'))->count();
+        return $this->returnData('Your Challenges are ',$countChallenge,'Count of User Challenges','201') ;
+    }
+
+
+
+    // return feeling about specific challenge
+    public function getCountFeeling(Request $request)
+    {
+        $feeling1 = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
+            ->where('feeling',1)->count();
+
+        $feeling2 = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
+            ->where('feeling',2)->count();
+
+        $feeling3 = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
+            ->where('feeling',3)->count();
+
+        $feeling4 = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
+            ->where('feeling',4)->count();
+
+        return $this->return4Data('feeling1',$feeling1,'feeling2',$feeling2, 'feeling3',
+            $feeling3,'feeling4',$feeling4,'Count of feelings about every Challenge','201') ;
+    }
+
+
+
+    // delete/skip challenge's today
+    public function deleteChallenge(Request $request)
+    {
+        DB::table('user_challenge')->where('user_id',$request->input('user_id'))
+            ->where('challenge_id',$request->input('challenge_id'))->delete();
+
+        return $this->returnSuccessMessage('skipping the challenge successfully','201');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    // to add user image
-//    public function userImage(Request $request)
-//    {
-//        $user = User::find($request->input('user_id'));
-//
-//        if($user)
-//        {
-//            $user->avatar = $request->input('avatar');
-//            $user->save();
-//            return $this->returnData('user_avatar',$user->avatar,'You add your image successfully','201');
-//        }
-//
-//    }
-
-
-
-//    // to get all hours
-//    public function getDates()
-//    {
-//        $hours = Hour::select('hour')->get();
-//        $minutes = Minute::select('minute')->get();
-//        $period = Period::select('period')->get();
-//
-//        return $this->returnAllDates('Hours',$hours, 'Minutes' ,
-//            $minutes ,'Periods',$period,'There ara all dates in app','201');
-//    }
-
-
-
-// to add user beginning
-//    public function userBeginning(Request $request)
-//    {
-//        $hour = Hour::find($request->input('hour_id'));
-//        if($hour)
-//        {
-//            $hour->user_id = $request->input('user_id') ;
-//            $hour->save();
-//        }
-//
-//        $minute = Minute::find($request->input('minute_id'));
-//        if($minute)
-//        {
-//            $minute->user_id = $request->input('user_id') ;
-//            $minute->save();
-//        }
-//
-//        $period = Period::find($request->input('period_id'));
-//        if($period)
-//        {
-//            $period->user_id = $request->input('user_id') ;
-//            $period->save();
-//        }
-//
-//        $date = [ $hour->hour , $minute->minute , $period->period ];
-//
-//        return $this->returnData('userDate',$date,'You saved your beginning','201');
-//    }
