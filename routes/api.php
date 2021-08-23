@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 //});
 
 
-// to add user data like name , avatar and time
+// to add user data like name , avatar
 Route::post('/userData','UserController@userData');
 
 
@@ -59,11 +59,16 @@ Route::get('/getCountUserChallenge','UserController@getCountUserChallenge');
 Route::get('/getCountFeeling','UserController@getCountFeeling');
 
 
-// delete/skip challenge's today
-Route::post('/deleteChallenge','UserController@deleteChallenge');
+//  skip challenge's today
+Route::post('/skipChallenge','UserController@skipChallenge');
 
 
+// send feeling for doing challenge
+Route::post('/sendFeeling','UserController@sendFeeling');
 
+
+// send feeling for skipping challenge
+Route::post('/sendSkipping','UserController@sendSkipping');
 
 
 
