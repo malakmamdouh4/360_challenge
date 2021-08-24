@@ -129,10 +129,10 @@ class UserController extends Controller
     // to return all challenges for user
     public function getUserChallenge(Request $request)
     {
-        $user = User::with('challenges')->find($request->input('user_id'));
+        $user = User::with('chall')->find($request->input('user_id'));
 
             return $this->return4Data('id',$user->id,'name',$user->name,'avatar',$user->avatar,
-                'challenges',$user->challenges,'Challenges for specific user','201');
+                'challenges',$user->chall,'Challenges for specific user','201');
     }
 
 
@@ -141,8 +141,8 @@ class UserController extends Controller
     public function getCountUserChallenge(Request $request)
     {
         $countChallenge = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
-            ->where('active',0)->count();
-        return $this->returnData('Your Challenges are ',$countChallenge,'Count of User Challenges','201') ;
+            ->where('active',1)->count();
+        return $this->returnData('Challenges',$countChallenge,'Count of User Challenges','201') ;
     }
 
 
@@ -150,26 +150,26 @@ class UserController extends Controller
     // return feeling about specific challenge
     public function getCountFeeling(Request $request)
     {
-        $feeling1 = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
-            ->where('active',0)->where('feeling',1)->count();
+        $best = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
+            ->where('feeling',0)->count();
 
-        $feeling2 = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
-            ->where('active',0)->where('feeling',2)->count();
+        $good = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
+            ->where('feeling',1)->count();
 
-        $feeling3 = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
-            ->where('active',0)->where('feeling',3)->count();
+        $boring = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
+            ->where('feeling',2)->count();
 
-        $feeling4 = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
-            ->where('active',0)->where('feeling',4)->count();
+        $extremeBoredom = DB::table('user_challenge')->where('user_id',$request->input('user_id'))
+            ->where('feeling',3)->count();
 
-        return $this->return4Data('feeling1',$feeling1,'feeling2',$feeling2, 'feeling3',
-            $feeling3,'feeling4',$feeling4,'Count of feelings about every Challenge','201') ;
+        return $this->return4Data('best',$best,'good',$good, 'boring',
+            $boring,'extremeBoredom',$extremeBoredom,'Count of feelings about every Challenge','201') ;
     }
 
 
 
-    // skip challenge's today
-    public function skipChallenge(Request $request)
+    // doing challenge's today
+    public function doChallenge(Request $request)
     {
         DB::table('user_challenge')->where('user_id',$request->input('user_id'))
             ->where('challenge_id',$request->input('challenge_id'))->update(['active'=>1]);
@@ -184,7 +184,7 @@ class UserController extends Controller
     {
         DB::table('user_challenge')->where('user_id',$request->input('user_id'))
             ->where('challenge_id',$request->input('challenge_id'))
-            ->where('active',0)
+            ->where('active',1)
             ->update(['feeling'=>$request->input('feeling')]);
 
         return $this->returnSuccessMessage('you send your feeling successfully','201');
@@ -197,7 +197,6 @@ class UserController extends Controller
     {
         DB::table('user_challenge')->where('user_id',$request->input('user_id'))
             ->where('challenge_id',$request->input('challenge_id'))
-            ->where('active',1)
             ->update(['skipping'=>$request->input('skipping')]);
 
         return $this->returnSuccessMessage('sorry, you skip this challenge','201');

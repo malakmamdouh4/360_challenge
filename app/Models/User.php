@@ -46,10 +46,14 @@ class User extends Model
     public function challenges()
     {
         return $this->belongsToMany('App\Models\Challenge','user_challenge',
-            'user_id', 'challenge_id')->wherePivot('active', 0);
+            'user_id', 'challenge_id');
     }
 
 
-
+    public function chall()
+    {
+        return $this->belongsToMany('App\Models\Challenge','user_challenge',
+            'user_id', 'challenge_id')->wherePivot('active', 1);
+    }
 
 }

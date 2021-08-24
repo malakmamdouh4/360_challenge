@@ -60,7 +60,7 @@ Route::get('/getCountFeeling','UserController@getCountFeeling');
 
 
 //  skip challenge's today
-Route::post('/skipChallenge','UserController@skipChallenge');
+Route::post('/doChallenge','UserController@doChallenge');
 
 
 // send feeling for doing challenge
