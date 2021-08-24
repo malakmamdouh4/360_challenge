@@ -131,8 +131,8 @@ class UserController extends Controller
     {
         $user = User::with('challenges')->find($request->input('user_id'));
 
-        return $this->return4Data('id',$user->id,'name',$user->id,'avatar',$user->avatar,
-            'challenges',$user->challenges,'Challenges for specific user','201');
+            return $this->return4Data('id',$user->id,'name',$user->name,'avatar',$user->avatar,
+                'challenges',$user->challenges,'Challenges for specific user','201');
     }
 
 
