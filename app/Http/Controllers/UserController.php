@@ -174,7 +174,7 @@ class UserController extends Controller
         DB::table('user_challenge')->where('user_id',$request->input('user_id'))
             ->where('challenge_id',$request->input('challenge_id'))->update(['active'=>1]);
 
-        return $this->returnSuccessMessage('skipping the challenge successfully','201');
+        return $this->returnSuccessMessage('Done challenge successfully','201');
     }
 
 
